@@ -1,15 +1,35 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div><strong>영업중</strong> {{ cnt }}</div>
+  <hr>
+  <Barista :order-list="orderList"/>
+  <hr>
+  <Kiosk :order-list="orderList"/>
+  <Customer ref="customer" :order-list="orderList"/>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Barista from './components/Barista.vue'
+import Kiosk from './components/Kiosk.vue'
+import Customer from './components/Customer.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Barista, Kiosk, Customer
+  },
+  data: function() {
+    return {
+      cnt : 0,
+      orderList: [],
+    };
+  },
+  created: function() {
+    setInterval(() => {
+      this.cnt++
+    }, 1000);
+  },
+  methods: {
+    
   }
 }
 </script>
