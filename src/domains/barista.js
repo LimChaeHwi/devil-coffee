@@ -42,4 +42,7 @@ export default class Barista {
         this.working = 'N'
         orderCoffee.finish()
     }
+    isWorking() {
+        return this.working == 'Y' ? true : false
+    }
 }

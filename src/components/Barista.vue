@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border">
     <strong>바리스타</strong>
     <div>
       <input type="text" v-model="newBaristas.name" />
@@ -81,6 +81,10 @@ export default {
     delBarista: function(index) {
       if (this.baristas.length == 1) {
         alert('최소 1명은 남아있어야 합니다.')
+        return
+      }
+      if (this.baristas[index].isWorking()) {
+        alert('작업중에는 퇴근할 수 없습니다.')
         return
       }
       this.baristas.splice(index, 1)

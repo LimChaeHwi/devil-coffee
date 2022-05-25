@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border">
       <strong>대기중 고객</strong>
       <ul>
           <li v-for="(item, index) in customers" :key="index">

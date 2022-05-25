@@ -1,8 +1,8 @@
 <template>
-  <div><strong>영업중</strong> {{ $msToHMS(time * 1000) }}</div>
-  <hr>
+  <div>
+    <strong>영업중</strong> {{ $msToHMS(time * 1000) }}
+  </div>
   <Barista :order-list="orderList"/>
-  <hr>
   <Kiosk :order-list="orderList"/>
   <Customer ref="customer" :order-list="orderList"/>
 </template>
@@ -41,6 +41,23 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.border {
+  border: 1px solid black;
+  width: 600px;
+  margin: 10px;
+  padding: 10px;
+}
+button {
+  background-color : white;
+  border: 1px solid;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 4px;
 }
 </style>

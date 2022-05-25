@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="border">
       <strong>메뉴</strong>
       <ul>
           <li v-for="(item, index) in menu" :key="index">
