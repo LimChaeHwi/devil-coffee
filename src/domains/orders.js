@@ -5,13 +5,13 @@ export default class Orders {
         this.customerId = customerId
         this.coffees = coffees
     }
-    setWait() {
+    waitOrders() {
         this.status = 'W'
     }
-    setStart() {
+    startOrders() {
         this.status = 'S'
     }
-    setFinish() {
+    finishOrders() {
         this.status = 'F'
     }
 }

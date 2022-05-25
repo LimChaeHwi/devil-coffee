@@ -1,5 +1,5 @@
 <template>
-  <div><strong>영업중</strong> {{ cnt }}</div>
+  <div><strong>영업중</strong> {{ $msToHMS(time * 1000) }}</div>
   <hr>
   <Barista :order-list="orderList"/>
   <hr>
@@ -19,13 +19,13 @@ export default {
   },
   data: function() {
     return {
-      cnt : 0,
+      time : 0,
       orderList: [],
     };
   },
   created: function() {
     setInterval(() => {
-      this.cnt++
+      this.time++
     }, 1000);
   },
   methods: {

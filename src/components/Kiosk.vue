@@ -13,7 +13,7 @@
           </li>
       </ul>
       <div>
-      {{ calculate }} 원
+      주문금액 {{ calculate }} 원
       </div>
       <div>
         <strong>사용자 이름</strong>
@@ -27,6 +27,7 @@
 import Coffee from '../domains/coffee.js'
 import Customer from '../domains/customer.js'
 import Orders from '../domains/orders.js'
+import OrderCoffee from '../domains/orderCoffee.js'
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name : 'Kiosk',
@@ -36,12 +37,13 @@ export default {
     data : function() {
         return {
             menu: [
-                new Coffee('AC', '아메리카노', 2000, 10000),
-                new Coffee('CL', '카페라떼', 2500, 20000),
+                new Coffee('AC', '아메리카노', 2000, 20000),
+                new Coffee('CL', '카페라떼', 2500, 30000),
                 new Coffee('CM', '카라멜마끼아또', 3500, 40000),
                 new Coffee('EP', '아인슈페너', 4000, 60000),
             ],
             cart: [],
+            orderCoffee: [],
             orderListData: [],
             newName: '',
         }
@@ -61,6 +63,11 @@ export default {
     methods: {
         addCart: function(coffee) {
             let order = {...coffee}
+            //  orderList 의 coffee 리스트
+            this.orderCoffee.push(new OrderCoffee(order.id, order.name, order.time))
+            //  제조시간이 긴 것부터 제조
+            this.orderCoffee.sort((a, b) => b.time - a.time)
+
             let index = this.cart.findIndex((element)=> {
                 return element.id === coffee.id
             })
@@ -77,16 +84,26 @@ export default {
             }
         },
         order: function() {
+            if (this.cart.length == 0) {
+                alert('메뉴를 선택해주세요.')
+                return
+            }
+            if (!this.newName) {
+                alert('이름을 입력해주세요.')
+                return
+            }
             let customerComp = this.$parent.$refs['customer']
             let customerId = customerComp.getCustomerSeqId()
             customerComp['customers'].push(new Customer(customerId, this.newName))
 
             this.orderListData = this.orderList
             
-            let orders = new Orders(this.getOrderSequenceNo(), customerId, this.cart)
-            orders.setWait()
+            let orders = new Orders(this.getOrderSequenceNo(), customerId, this.orderCoffee)
+            orders.waitOrders()
             this.orderListData.push(orders)
-
+            
+            //  초기화
+            this.orderCoffee = []
             this.cart = []
         },
         getOrderSequenceNo() {
