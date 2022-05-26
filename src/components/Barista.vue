@@ -1,18 +1,41 @@
 <template>
-  <div class="border">
+  <div class="page-border">
     <strong>바리스타</strong>
-    <div>
+    <div class="barista-enter">
       <input type="text" v-model="newBaristas.name" />
-      <button @click="addBarista(newBaristas.name)">출근</button>
+      <button class="barista-button" @click="addBarista(newBaristas.name)">출근</button>
+    </div>
+    <hr>
+    <div>
       <ul>
         <li v-for="(item, index) in baristas" :key="index">
-          {{ item.name + ', ' + $msToHMS(item.workingTime * 1000) }}
-          {{ $msToHMS(item.completeTime) }}
-          <progress max="100" :value="item.completeProgress"></progress>
-          <button @click="delBarista(index)">퇴근</button>
+          <div class="barista">
+            <span>
+              <span>
+                <i class="fa-solid fa-user"></i>
+                {{ item.name + ' '}}
+              </span>
+              <span>
+                <i class="fas fa-clock"></i>
+                {{ $msToHMS(item.workingTime * 1000) }}
+              </span>
+              <button class="barista-button" @click="delBarista(index)">퇴근</button>
+            </span>
+            <div>
+              <span>{{ item.coffee }}</span>
+              <span :class="'working-' + item.working">
+                {{ item.working == 'Y' ? '제조중' : '대기중' }}
+              </span>
+            </div>
+            <div>
+              {{ '남은시간 ' + $msToHMS(item.completeTime) }}
+              <progress max="100" :value="item.completeProgress"></progress>
+              <hr>
+            </div>
+          </div>
         </li>
       </ul>
-      {{ checkBarista }}
+      <span v-show="false">{{ checkBarista }}</span>
     </div>
   </div>
 </template>
@@ -147,5 +170,37 @@ export default {
 <style>
   li {
     list-style-type: none;
+  }
+  .barista-button {
+    background-color : white;
+    border: 1px solid;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin: 4px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  .barista-enter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .barista {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .working-Y {
+    background-color: red;
+    padding: 4px;
+    color: white;
+  }
+  .working-N {
+    background-color: green;
+    padding: 2px;
+    color: white;
   }
 </style>

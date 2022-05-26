@@ -46,18 +46,17 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.border {
+.page-border {
   border: 1px solid black;
-  width: 600px;
+  min-width: 20%;
   margin: 10px;
   padding: 10px;
+  border-radius: 6px;
 }
-button {
-  background-color : white;
-  border: 1px solid;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 4px;
-  padding-right: 4px;
+.tag-border {
+  border: 1px solid black;
+  padding: 4px;
+  margin: 4px;
 }
+
 </style>

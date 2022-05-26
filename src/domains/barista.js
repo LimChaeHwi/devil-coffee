@@ -6,10 +6,12 @@ export default class Barista {
     wInterval
     cInterval
     speed
+    coffee
     constructor(id, name) {
         this.id = id
         this.name = name
         this.working = 'N'
+        this.coffee = ''
         this.speed = 7000
     }
     work() {
@@ -22,6 +24,7 @@ export default class Barista {
     }
     make(orderCoffee) {
         this.working = 'Y'
+        this.coffee = orderCoffee.name
         //  progressBar: +(100 / (time / 1000))
         //  time: -1000
         this.completeTime = parseInt(orderCoffee.time)
@@ -40,6 +43,7 @@ export default class Barista {
         this.completeProgress = 0   //  초기화
         this.completeTime = 0
         this.working = 'N'
+        this.coffee = ''
         orderCoffee.finish()
     }
     isWorking() {

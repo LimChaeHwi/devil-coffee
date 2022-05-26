@@ -1,24 +1,39 @@
 <template>
-  <div class="border">
+  <div class="page-border">
       <strong>메뉴</strong>
+      <hr>
+      <div class="menu-head">
+        <span>이름</span>
+        <span>가격 (제조시간)</span>
+      </div>
       <ul>
           <li v-for="(item, index) in menu" :key="index">
-            <button @click="addCart(item)">{{ item.name }}</button>{{ item.price }}
+            <div class="menu-body" @click="addCart(item)">
+                <button class="menu-button">{{ item.name }}</button>
+                <span>{{ item.price }} 원 {{ '('+ (item.time/1000) +'초)' }}</span>
+            </div>
           </li>
       </ul>
+      <hr>
       <ul>
           <li v-for="(item, index) in cart" :key="index">
-            <span>{{ item.name }}</span>
-            <span>{{ item.count }} 잔</span>
+            <div class="menu-body" @click="deleteCart(item)">
+                <span>{{ item.name }}</span>
+                <span>{{ item.count }} 잔</span>
+            </div>
           </li>
       </ul>
       <div>
       주문금액 {{ calculate }} 원
       </div>
       <div>
-        <strong>사용자 이름</strong>
-        <input type="text" v-model="newName" />
-        <button @click="order()">주문하기</button>
+        <div>
+            <strong>사용자 이름 </strong>
+            <input type="text" v-model="newName" />
+        </div>
+        <div>
+            <button class="order-button" @click="order()">주문하기</button>
+        </div>
       </div>
   </div>
 </template>
@@ -46,6 +61,7 @@ export default {
             orderCoffee: [],
             orderListData: [],
             newName: '',
+            orderNo: 0,
         }
     }, 
     created: function() {
@@ -107,18 +123,58 @@ export default {
             this.cart = []
         },
         getOrderSequenceNo() {
-            var index = 0
-            if (this.orderListData.length > 0) {
-                index = this.orderListData.length - 1
-                return this.orderListData[index]['no'] + 1
-            } else {
-                return 1
-            }
+            return ++this.orderNo
+        },
+        deleteCart: function(item) {
+            console.log('item', item)
+            
         }
     }
 }
 </script>
 
 <style>
-
+    .menu-head {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding-inline-start: 50px
+    }
+    .menu-body {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        border : 1px solid #bbb;
+        margin-bottom : 4px;
+        padding : 2px;
+        border-radius: 14px;
+        padding-inline-start: 10px;
+        cursor: pointer;
+    }
+    .menu-button {
+        background-color : transparent;
+        border: 0px solid;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 4px;
+        padding-right: 4px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    .order-button {
+        background-color : red;
+        color: white;
+        border: 1px solid red;
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 4px;
+        padding-right: 4px;
+        margin: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        width: 60%;
+        cursor: pointer;
+    }
 </style>
