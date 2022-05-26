@@ -125,7 +125,7 @@ export default {
         getOrderSequenceNo() {
             return ++this.orderNo
         },
-        deleteCart: function(item) {
+        deleteCart: function() {
             // console.log('item', item)
             
         }
