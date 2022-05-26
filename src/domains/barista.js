@@ -31,9 +31,9 @@ export default class Barista {
         this.cInterval = setInterval(()=> {
             this.completeProgress += Math.ceil(100 / (parseInt(orderCoffee.time) / this.speed) *10)/10
             this.completeTime -= this.speed
-            console.log('this.completeProgress', this.completeProgress)
+            // console.log('this.completeProgress', this.completeProgress)
             if (this.completeProgress >= 100) {
-                console.log('serve')
+                // console.log('serve')
                 this.serve(orderCoffee)
             }
         }, 1000)

@@ -126,7 +126,7 @@ export default {
             return ++this.orderNo
         },
         deleteCart: function(item) {
-            console.log('item', item)
+            // console.log('item', item)
             
         }
     }

@@ -75,11 +75,11 @@ export default {
   },
   watch: {
     checkOrderListData() {
-      console.log('주문 추가', this.orderListData)
+      // console.log('주문 추가', this.orderListData)
       this.makeCoffee()
     },
     checkBarista() {
-      console.log('작업 변경', this.baristas)
+      // console.log('작업 변경', this.baristas)
       this.checkOrderFinish()
       this.makeCoffee()
     }
@@ -121,7 +121,7 @@ export default {
     },
     makeCoffee: function() {
       //  가용한 직원으로 주문리스트 처리
-      console.log('makeCoffee')
+      // console.log('makeCoffee')
       let order
       for (let i = this.sIndex; i < this.orderListData.length; i++) {
         order = this.orderListData[i]
